@@ -14,27 +14,6 @@ app.get('/nueva-ruta', (req, res) => {
 
 routerApi(app);
 
-// app.get('/users', (req, res) => {
-//   const { limit, offset } = req.query;
-//   if (limit && offset) {
-//     res.json({
-//       limit,
-//       offset,
-//     });
-//   }
-
-//   res.send('No hay parametos');
-// });
-
-// app.get('/categories/:categoryId/products/:productId', (req, res) => {
-//   const { categoryId, productId } = req.params;
-
-//   res.json({
-//     categoryId,
-//     productId,
-//   });
-// });
-
 app.listen(port, () => {
   console.log('Mi port' + port);
 });
