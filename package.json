@@ -19,6 +19,7 @@
     "prettier": "^2.5.1"
   },
   "dependencies": {
+    "@hapi/boom": "9.1.4",
     "express": "^4.17.2",
     "faker": "^5.5.3"
   }
