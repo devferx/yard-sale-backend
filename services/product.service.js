@@ -1,10 +1,16 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
 
+const pool = require('../libs/postgres.pool');
+
 class ProductsService {
   constructor() {
     this.products = [];
     this.generate();
+    this.pool = pool;
+    this.pool.on('error', (err) => {
+      console.error('Unexpected error on idle client', err);
+    });
   }
 
   generate() {
@@ -27,13 +33,10 @@ class ProductsService {
     return newProduct;
   }
 
-  find() {
-    // return this.products;
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.products);
-      }, 3000);
-    });
+  async find() {
+    const query = 'SELECT * FROM tasks';
+    const resp = await this.pool.query(query);
+    return resp.rows;
   }
 
   async findOne(id) {
