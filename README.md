@@ -2,9 +2,10 @@
 Uses:
 
 ### Docker Commands
-**Run postgres Docker**
+**Run postgres and Pgadmin Docker**
 ```
 docker-compose up -d postgres
+docker-compose up -d pgadmin
 ```
 
 **List Docker Process**
