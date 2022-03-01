@@ -18,6 +18,6 @@ setupModels(sequelize);
 // Lee los modelos y comienza a crear las tablas
 // Es muy delicado y no se aconseja utilizar en Producción
 // Debido a que esta sobreescribiendo la base de datos
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = sequelize;
