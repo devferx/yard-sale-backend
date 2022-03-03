@@ -79,5 +79,3 @@ router.delete(
 );
 
 module.exports = router;
-
-users.router.js;
