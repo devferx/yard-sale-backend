@@ -28,6 +28,16 @@ const OrderSchema = {
     field: 'create_at',
     defaultValue: Sequelize.NOW,
   },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      if (this.items.length <= 0) return 0;
+      return this.items.reduce(
+        (total, item) => total + item.price * item.OrderProduct.amount,
+        0
+      );
+    },
+  },
 };
 
 class Order extends Model {
@@ -38,8 +48,8 @@ class Order extends Model {
     this.belongsToMany(models.Product, {
       as: 'items',
       through: models.OrderProduct,
-      foreignKey: 'OrderId',
-      otherKey: 'ProductId',
+      foreignKey: 'orderId',
+      otherKey: 'productId',
     });
   }
 
