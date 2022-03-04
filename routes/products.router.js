@@ -1,4 +1,5 @@
 const express = require('express');
+// const faker = require('faker');
 
 const ProductsService = require('../services/product.service');
 const validatorHandler = require('../middlewares/validator.handler');
@@ -6,15 +7,33 @@ const {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
+  queryProductSchema,
 } = require('../schemas/product.schema');
 
 const router = express.Router();
 const service = new ProductsService();
 
-router.get('/', async (req, res) => {
-  const products = await service.find();
-  res.json(products);
-});
+router.get(
+  '/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res) => {
+    const products = await service.find(req.query);
+    res.json(products);
+  }
+);
+
+// router.get('/generate', () => {
+//   const products = new Array(50).fill(1).map(() => ({
+//     name: faker.commerce.productName(),
+//     price: parseInt(faker.commerce.price(), 10),
+//     description: faker.lorem.paragraph(),
+//     image: faker.image.imageUrl(),
+//     categoryId: 1,
+//   }));
+//   products.forEach(async (product) => {
+//     await service.create(product);
+//   });
+// });
 
 router.get('/filter', (req, res) => {
   res.send('Yo soy un filter');
