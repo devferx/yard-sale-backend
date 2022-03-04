@@ -1,5 +1,5 @@
 const express = require('express');
-// const faker = require('faker');
+const faker = require('faker');
 
 const ProductsService = require('../services/product.service');
 const validatorHandler = require('../middlewares/validator.handler');
@@ -22,18 +22,18 @@ router.get(
   }
 );
 
-// router.get('/generate', () => {
-//   const products = new Array(50).fill(1).map(() => ({
-//     name: faker.commerce.productName(),
-//     price: parseInt(faker.commerce.price(), 10),
-//     description: faker.lorem.paragraph(),
-//     image: faker.image.imageUrl(),
-//     categoryId: 1,
-//   }));
-//   products.forEach(async (product) => {
-//     await service.create(product);
-//   });
-// });
+router.post('/generate', () => {
+  const products = new Array(50).fill(1).map(() => ({
+    name: faker.commerce.productName(),
+    price: parseInt(faker.commerce.price(), 10),
+    description: faker.lorem.paragraph(),
+    image: faker.image.imageUrl(),
+    categoryId: 1,
+  }));
+  products.forEach(async (product) => {
+    await service.create(product);
+  });
+});
 
 router.get('/filter', (req, res) => {
   res.send('Yo soy un filter');
