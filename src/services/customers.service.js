@@ -1,7 +1,7 @@
 const boom = require('@hapi/boom');
 const bcrypt = require('bcrypt');
 
-const { models } = require('../libs/sequelize');
+const { models } = require('../db/sequelize');
 
 class CustomerService {
   constructor() {}

@@ -25,7 +25,7 @@ const OrderSchema = {
   createAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    field: 'create_at',
+    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
   total: {

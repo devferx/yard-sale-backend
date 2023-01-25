@@ -1,9 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { USER_TABLE } = require('./user.model');
 
-const CUSTOMER_TABLE = 'customers';
+const { CATEGORY_TABLE } = require('./category.model');
 
-const CustomerSchema = {
+const PRODUCT_TABLE = 'products';
+
+const ProductSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -11,31 +12,33 @@ const CustomerSchema = {
     type: DataTypes.INTEGER,
   },
   name: {
+    type: DataTypes.STRING,
     allowNull: false,
-    type: DataTypes.STRING,
   },
-  lastName: {
+  image: {
+    type: DataTypes.STRING,
     allowNull: false,
-    type: DataTypes.STRING,
-    field: 'last_name',
   },
-  phone: {
-    allowNull: true,
+  description: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
-  createdAt: {
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  createAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'create_at',
+    field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  userId: {
-    field: 'user_id',
+  categoryId: {
+    field: 'category_id',
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
     references: {
-      model: USER_TABLE,
+      model: CATEGORY_TABLE,
       key: 'id',
     },
     onUpdate: 'CASCADE',
@@ -43,23 +46,24 @@ const CustomerSchema = {
   },
 };
 
-class Customer extends Model {
+class Product extends Model {
   static associate(models) {
-    this.belongsTo(models.User, { as: 'user' });
-    this.hasMany(models.Order, {
-      as: 'orders',
-      foreignKey: 'customerId',
+    this.belongsTo(models.Category, {
+      as: 'category',
     });
   }
-
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CUSTOMER_TABLE,
-      modelName: 'Customer',
+      tableName: PRODUCT_TABLE,
+      modelName: 'Product',
       timestamps: false,
     };
   }
 }
 
-module.exports = { Customer, CustomerSchema, CUSTOMER_TABLE };
+module.exports = {
+  Product,
+  ProductSchema,
+  PRODUCT_TABLE,
+};
