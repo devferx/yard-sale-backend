@@ -17,6 +17,16 @@ const typeDefs = `
     getBoolean: Boolean
     getID: ID
     getNumbers(numbers: [Int!]!): [Int]
+    getProduct: Product
+  }
+
+  type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    description: String!
+    image: String!
+    createdAt: String!
   }
 `;
 
@@ -31,6 +41,14 @@ const resolvers = {
     getBoolean: () => Math.random() > 0.5,
     getID: () => '1234567890',
     getNumbers: (_, args) => args.numbers,
+    getProduct: () => ({
+      id: '1',
+      name: 'Product 1',
+      price: 100,
+      description: 'Description of product 1',
+      image: 'https://placeimg.com/640/480/any',
+      createdAt: new Date().toISOString(),
+    }),
   },
 };
 
