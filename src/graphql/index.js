@@ -11,6 +11,11 @@ const typeDefs = `
   type Query {
     hello: String
     getPerson(name: String, age: Int): String
+    getInt: Int
+    getFloat: Float
+    getString: String
+    getBoolean: Boolean
+    getID: ID
   }
 `;
 
@@ -19,6 +24,11 @@ const resolvers = {
     hello: () => 'Hello world!',
     getPerson: (_, args) =>
       `Hello, my name is ${args.name}, I'm ${args.age} years old`,
+    getInt: () => 123,
+    getFloat: () => Math.random() * 100,
+    getString: () => 'Hello world',
+    getBoolean: () => Math.random() > 0.5,
+    getID: () => '1234567890',
   },
 };
 
