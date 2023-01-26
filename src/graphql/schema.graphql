@@ -15,6 +15,10 @@ type Query {
   products: [Product!]!
 }
 
+type Mutation {
+  addProduct(dto: CreateProductDto!): Product!
+}
+
 type Product {
   id: ID!
   name: String!
@@ -22,4 +26,12 @@ type Product {
   description: String!
   image: String!
   createdAt: String
+}
+
+input CreateProductDto {
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  categoryId: ID!
 }
