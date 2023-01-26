@@ -16,6 +16,7 @@ type Query {
 }
 
 type Mutation {
+  login(email: String!, password: String!): AuthResponse
   addProduct(dto: CreateProductDto!): Product
   updateProduct(id: ID!, dto: UpdateProductDto!): Product
   deleteProduct(id: ID!): ID
@@ -51,4 +52,16 @@ type Category {
   id: ID!
   name: String!
   image: String!
+}
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  role: String!
+  createdAt: String
 }

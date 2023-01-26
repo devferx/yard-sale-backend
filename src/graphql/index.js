@@ -5,6 +5,7 @@ const {
 } = require('@apollo/server/plugin/landingPage/default');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { loadFiles } = require('@graphql-tools/load-files');
+const { buildContext } = require('graphql-passport');
 
 const resolvers = require('./resolvers');
 
@@ -21,7 +22,12 @@ const useGraphQL = async (app) => {
 
   await server.start();
 
-  app.use('/graphql', expressMiddleware(server));
+  app.use(
+    '/graphql',
+    expressMiddleware(server, {
+      context: ({ req, res }) => buildContext({ req, res }),
+    })
+  );
 };
 
 module.exports = {

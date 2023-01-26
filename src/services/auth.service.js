@@ -33,7 +33,7 @@ class AuthService {
     };
 
     const token = jwt.sign(payload, config.jwtSecret);
-    return { user, token };
+    return { user, access_token: token };
   }
 
   async recoveryPassword(email) {
