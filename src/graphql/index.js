@@ -5,15 +5,20 @@ const {
 } = require('@apollo/server/plugin/landingPage/default');
 const { expressMiddleware } = require('@apollo/server/express4');
 
+// Get = Query
+// POST, PUT, DELETE = Mutation
 const typeDefs = `
   type Query {
     hello: String
+    getPerson(name: String, age: Int): String
   }
 `;
 
 const resolvers = {
   Query: {
     hello: () => 'Hello world!',
+    getPerson: (_, args) =>
+      `Hello, my name is ${args.name}, I'm ${args.age} years old`,
   },
 };
 
