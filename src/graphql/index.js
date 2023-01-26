@@ -1,7 +1,9 @@
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer } = require('@apollo/server');
 const {
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} = require('apollo-server-core');
+  ApolloServerPluginLandingPageProductionDefault,
+  ApolloServerPluginLandingPageLocalDefault,
+} = require('@apollo/server/plugin/landingPage/default');
+const { expressMiddleware } = require('@apollo/server/express4');
 
 const typeDefs = `
   type Query {
@@ -19,11 +21,16 @@ const useGraphQL = async (app) => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
+    plugins: [
+      process.env.NODE_ENV === 'production'
+        ? ApolloServerPluginLandingPageProductionDefault()
+        : ApolloServerPluginLandingPageLocalDefault(),
+    ],
   });
 
   await server.start();
-  server.applyMiddleware({ app });
+
+  app.use('/graphql', expressMiddleware(server));
 };
 
 module.exports = {

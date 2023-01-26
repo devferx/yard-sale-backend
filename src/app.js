@@ -16,7 +16,10 @@ const createApp = async () => {
   const app = express();
   app.use(express.json());
 
-  const whiteList = ['http://localhost:3000'];
+  const whiteList = [
+    'http://localhost:3000',
+    'https://studio.apollographql.com',
+  ];
   const options = {
     origin: (origin, callback) => {
       if (whiteList.includes(origin) || !origin) {
