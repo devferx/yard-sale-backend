@@ -28,6 +28,8 @@ type Product {
   description: String!
   image: String!
   createdAt: String
+  categoryId: ID!
+  category: Category!
 }
 
 input CreateProductDto {
@@ -43,4 +45,10 @@ input UpdateProductDto {
   description: String
   image: String
   categoryId: ID
+}
+
+type Category {
+  id: ID!
+  name: String!
+  image: String!
 }
