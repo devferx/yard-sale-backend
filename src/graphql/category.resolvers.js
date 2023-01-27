@@ -9,7 +9,10 @@ const addCategory = async (_, { dto }, context) => {
 
   checkRolesGql(user, 'admin', 'customer');
 
-  return service.create(dto);
+  return service.create({
+    ...dto,
+    image: dto.image.href,
+  });
 };
 
 module.exports = {
