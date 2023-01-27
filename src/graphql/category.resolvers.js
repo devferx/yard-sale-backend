@@ -4,6 +4,8 @@ const { checkJwtGql } = require('../utils/checkJwtGql');
 
 const service = new CategoryService();
 
+const getCategory = async (_, { id }) => service.findOne(id);
+
 const addCategory = async (_, { dto }, context) => {
   const user = await checkJwtGql(context);
 
@@ -16,5 +18,6 @@ const addCategory = async (_, { dto }, context) => {
 };
 
 module.exports = {
+  getCategory,
   addCategory,
 };

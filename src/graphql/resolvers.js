@@ -1,11 +1,12 @@
 const {
   getProduct,
   getProducts,
+  getProductsByCategory,
   addProduct,
   updateProduct,
   deleteProduct,
 } = require('./product.resolvers');
-const { addCategory } = require('./category.resolvers');
+const { getCategory, addCategory } = require('./category.resolvers');
 const { login } = require('./auth.resolvers');
 const { RegularExpression } = require('graphql-scalars');
 
@@ -28,6 +29,8 @@ const resolvers = {
     // Products
     product: getProduct,
     products: getProducts,
+    // Categories
+    category: getCategory,
   },
   Mutation: {
     login,
@@ -37,6 +40,9 @@ const resolvers = {
     addCategory,
   },
   CategoryNameType,
+  Category: {
+    products: getProductsByCategory,
+  },
 };
 
 module.exports = resolvers;
