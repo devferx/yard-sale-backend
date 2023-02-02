@@ -5,6 +5,6 @@ const createApp = require('./app');
   const app = await createApp();
 
   app.listen(port, () => {
-    console.log(`Mi port ${port}`);
+    console.log(`🚀 Server ready at http://localhost:${port}`);
   });
 })();

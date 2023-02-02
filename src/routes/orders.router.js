@@ -6,7 +6,7 @@ const {
   getOrderSchema,
   createOrderSchema,
   addItemSchema,
-} = require('../schemas/order.schema');
+} = require('../dtos/order.dto');
 
 const router = express.Router();
 const service = new OrderService();

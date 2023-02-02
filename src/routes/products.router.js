@@ -8,7 +8,7 @@ const {
   updateProductSchema,
   getProductSchema,
   queryProductSchema,
-} = require('../schemas/product.schema');
+} = require('../dtos/product.dto');
 
 const router = express.Router();
 const service = new ProductsService();
