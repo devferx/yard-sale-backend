@@ -38,6 +38,12 @@ const createApp = async () => {
     res.send('Hola mi server en express');
   });
 
+  app.get('/hello', (req, res) => {
+    res.status(200).json({
+      name: 'Fernando',
+    });
+  });
+
   app.get('/nueva-ruta', checkApiKey, (req, res) => {
     res.send('Hola, soy una nueva ruta');
   });
