@@ -5,15 +5,15 @@ const createApp = require('../src/app');
 describe('test for app', () => {
   let app = null;
   let server = null;
-  let api = null;
+  let api = request(null);
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await createApp();
     server = app.listen(9000);
     api = request(app);
   });
 
-  afterEach(() => {
+  afterAll(() => {
     server.close();
   });
 

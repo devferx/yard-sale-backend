@@ -1,13 +1,16 @@
 const { ValidationError } = require('sequelize');
+const { config } = require('../config/config');
 
 function logErrors(err, req, res, next) {
-  // console.log('logErrors');
-  // console.error(err);
+  if (config.env === 'dev') {
+    console.log(err);
+  }
+
   next(err);
 }
 
-function errorHandler(err, req, res, next) {
-  console.log('errorHandler');
+function errorHandler(err, req, res) {
+  // console.log('errorHandler');
   res.status(500).json({
     message: err.message,
     stack: err.stack,

@@ -8,13 +8,13 @@ describe('test for /users path', () => {
   let server = null;
   let api = request(null);
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await createApp();
     server = app.listen(9000);
     api = request(app);
   });
 
-  afterEach(() => {
+  afterAll(() => {
     server.close();
   });
 
