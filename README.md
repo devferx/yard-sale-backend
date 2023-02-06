@@ -21,4 +21,12 @@ docker-compose down
 ```
 docker-compose down postgres
 ```
+**Conect to DB from Docker**
 
+```sh
+docker-compose exec postgres bash
+psql -h localhost -d my_store -U devferx
+\d+
+SELECT * FROM users;
+DELETE FROM users where id =<id>;
+```
