@@ -2,6 +2,7 @@ const request = require('supertest');
 
 const createApp = require('../src/app');
 const { models } = require('../src/db/sequelize');
+const { upSeed, downSeed } = require('./utils/seed');
 
 describe('test for /profile path', () => {
   let app = null;
@@ -14,10 +15,12 @@ describe('test for /profile path', () => {
     app = await createApp();
     server = app.listen(9000);
     api = request(app);
+    await upSeed();
   });
 
-  afterAll(() => {
+  afterAll(async () => {
     server.close();
+    await downSeed();
   });
 
   describe('GET /my-user admin user', () => {
@@ -62,10 +65,10 @@ describe('test for /profile path', () => {
 
   describe('GET /my-user customer user', () => {
     beforeAll(async () => {
-      const user = await models.User.findByPk('2');
+      const user = await models.User.findByPk('1');
       const inputData = {
         email: user.email,
-        password: 'customer123',
+        password: 'admin123',
       };
 
       const { body: bodyLogin } = await api
@@ -76,7 +79,7 @@ describe('test for /profile path', () => {
     });
 
     test('should return a user with access token valid', async () => {
-      const user = await models.User.findByPk('2');
+      const user = await models.User.findByPk('1');
 
       const { statusCode, body } = await api
         .get(`/api/v1/profile/my-user`)
