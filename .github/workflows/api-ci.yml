@@ -4,7 +4,7 @@ on:
   push:
     branches: ["*"]
   pull_request:
-    branches: ["main", "master"]
+    branches: [main, master]
 
 jobs:
   e2e:
@@ -14,13 +14,13 @@ jobs:
 
     services:
       postgres-e2e:
-      image: postgres:13
-      ports:
-        - 5432:5432
-      environment:
-        POSTGRES_DB: db_e2e
-        POSTGRES_USER: e2e
-        POSTGRES_PASSWORD: e2e123
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: db_e2e
+          POSTGRES_USER: e2e
+          POSTGRES_PASSWORD: e2e123
 
     steps:
       - name: Checkout
