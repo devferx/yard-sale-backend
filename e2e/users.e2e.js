@@ -61,7 +61,6 @@ describe('test for /users path', () => {
       const inputData = {
         email: 'jhondoe@mail.com',
         password: 'password123',
-        role: 'admin',
       };
 
       const { statusCode, body } = await api
@@ -72,7 +71,7 @@ describe('test for /users path', () => {
       // check db
       const user = await models.User.findByPk(body.id);
       expect(user).toBeTruthy();
-      expect(user.role).toEqual('admin');
+      expect(user.role).toEqual('customer');
       expect(user.email).toEqual(inputData.email);
     });
   });
