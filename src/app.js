@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const routerApi = require('./routes');
 const { useGraphQL } = require('./graphql');
@@ -16,27 +17,26 @@ const createApp = async () => {
   const app = express();
   app.use(express.json());
 
-  const whiteList = [
-    'http://localhost:3000',
-    'https://studio.apollographql.com',
-  ];
-  const options = {
-    origin: (origin, callback) => {
-      if (whiteList.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS :)'));
-      }
-    },
-  };
+  // const whiteList = [
+  //   'http://localhost:3000',
+  //   'https://studio.apollographql.com',
+  // ];
+  // const options = {
+  //   origin: (origin, callback) => {
+  //     if (whiteList.includes(origin) || !origin) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS :)'));
+  //     }
+  //   },
+  // };
 
-  app.use(cors(options));
+  // app.use(cors(options));
+  app.use(cors());
 
   require('./utils/auth');
 
-  app.get('/', (req, res) => {
-    res.send('Hola mi server en express');
-  });
+  app.use(express.static(path.join(__dirname, 'static')));
 
   app.get('/hello', (req, res) => {
     res.status(200).json({

@@ -27,6 +27,7 @@ const useGraphQL = async (app) => {
         ? ApolloServerPluginLandingPageProductionDefault()
         : ApolloServerPluginLandingPageLocalDefault(),
     ],
+    introspection: true,
   });
 
   await server.start();
